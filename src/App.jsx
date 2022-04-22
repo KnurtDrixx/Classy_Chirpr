@@ -13,6 +13,13 @@ class App extends React.Component {
     text: "",
   };
 
+  randomColor = () => {
+    const R = Math.floor(Math.random() * 256);
+    const G = Math.floor(Math.random() * 256);
+    const B = Math.floor(Math.random() * 256);
+    return `rgb(${R}, ${G}, ${B})`;
+  };
+
   handleButtonClick = () => {
     if (!this.state.text) return;
 
@@ -26,23 +33,41 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Classest Chirpr</h1>
-        <>
-          <input maxLength={44} value={this.state.text} onChange={(e) => this.setState({ text: e.target.value })} />
-          <button onClick={this.handleButtonClick}>Make a new Post!</button>
-        </>
+      <>
         <div>
-          {this.state.posts.map((post) => (
-            <div key={post.uuid}>
-              {post.chrpText}
-              <div>
-                <GiKiwiBird />
-              </div>
+          <h1 className="d-flex justify-content-center" style={{ color: "#FF69B4" }}>
+            Classest Chirpr
+          </h1>
+          <div className="d-flex justify-content-center">
+            <input className="form-control" maxLength={44} value={this.state.text} onChange={(e) => this.setState({ text: e.target.value })} />
+            <button className="btn" style={{ backgroundColor: this.randomColor(), color: this.randomColor() }} onClick={this.handleButtonClick}>
+              Make a new Post!
+            </button>
+          </div>
+          <div className="d-flex flex-row justify-content-center container">
+            <div className="container d-flex flex-row flex-wrap m-1 p-1 justify-content-center">
+              {this.state.posts.map((post) => (
+                <div key={post.uuid} style={{ backgroundColor: this.randomColor(), color: this.randomColor() }} className="card  p-2 flex-row ">
+                  {post.chrpText}
+                  <div>
+                    <GiKiwiBird />
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
+        <footer>
+          <marquee style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>
+            <span style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>👀</span>
+            <span style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>Ervin</span>
+            <span style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>Howell</span>
+            <span style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>is</span>
+            <span style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>watching</span>
+            <span style={{ backgroundColor: this.randomColor(), color: this.randomColor() }}>👀</span>
+          </marquee>
+        </footer>
+      </>
     );
   }
 }
